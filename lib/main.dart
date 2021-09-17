@@ -1,45 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:pill_city/session.dart';
+import 'package:pill_city/welcome_vc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const PillCityAPP());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class PillCityAPP extends StatelessWidget {
+  const PillCityAPP({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  // 此部件是應用程式的根。
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: '',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
+        // 這是應用程序的主題。
+        // 嘗試使用“flutter run”來執行應用程式。您將看到應用程式有一個藍色工具列。然後，在不退出應用程式的情況下，嘗試將下麵的primarySwatch更改為Colors.green，然後呼叫“hot reload”（在執行“flutter run”的控制檯中按“r”，或將更改儲存到Flutter IDE中的“hot reload”）。請注意，計數器沒有重置回零；應用程式未重新啟動。
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: ''),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+  // 此小部件是應用程式的主頁。它是有狀態的，這意味著它有一個狀態物件（定義如下），其中包含影響其外觀的欄位。
+  // 此類是狀態的配置。它儲存由父級（本例中為應用程式小部件）提供並由狀態的構建方法使用的值（本例中為標題）。小部件子類中的欄位始終標記為“final”。
 
   final String title;
 
@@ -48,68 +36,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  @override
+  void initState() {
+    super.initState();
+    chkLogin();
+  }
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  // 檢查本地是否有登入狀態的記錄
+  void chkLogin() async {
+    Session session = Session();
+    bool isLocalLogin = await session.isLocalLogin();
+    if (isLocalLogin) {
+    } else {
+      // Navigator.pushReplacementNamed(context, WelcomeViewController, (route) => false)(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const WelcomeViewController()),
+      // );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const WelcomeViewController()),
+          (route) => false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    // 每次呼叫setState時都會重新執行此方法，例如，上面的_incrementCounter方法。
+    // Flutter 框架已經過最佳化，可以快速地重新執行構建方法，因此您可以只重建任何需要更新的內容，而不必單獨更改小部件的例項。
+    return const Text("");
   }
 }

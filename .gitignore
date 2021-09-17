@@ -44,3 +44,12 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#
+._*
+*.7z
+*.zip
+*.pptx
+*.psd
+*.lock
+**/build/
