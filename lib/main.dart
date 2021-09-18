@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/session.dart';
-import 'package:pill_city/welcome_vc.dart';
+import 'package:pill_city/functions/session.dart';
+import 'package:pill_city/welcome/welcome_c.dart';
 
 void main() {
   runApp(const PillCityAPP());

@@ -1,4 +1,5 @@
 // 檢查是否存有使用者登入狀態
+import 'package:pill_city/common/global.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Session {
@@ -14,6 +15,7 @@ class Session {
     final prefs = await SharedPreferences.getInstance();
     accessToken = prefs.getString('access_token') ?? "";
     eprRu = prefs.getString('epr_ru') ?? "";
+    Global.accessToken = accessToken;
     if (accessToken.isNotEmpty) {
       return true;
     }
@@ -32,5 +34,6 @@ class Session {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('access_token');
     prefs.remove('epr_ru');
+    Global.accessToken = '';
   }
 }
