@@ -88,7 +88,9 @@ class WelcomeView extends State<WelcomeViewController> {
               children: <Widget>[
                 ElevatedButton(
                   child: const Text("　登录　"),
-                  onPressed: () {},
+                  onPressed: () {
+                    f.toLoginPage(context);
+                  },
                 ),
                 TextButton(onPressed: () {}, child: const Text("使用条款"))
               ],
