@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
-import 'package:pill_city/login/login_c.dart';
+import 'package:pill_city/login/login_view_controller.dart';
 
-class Welcome {
+class WelcomeFunction {
   Future<String> getVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return 'v' + packageInfo.version + ' build ' + packageInfo.buildNumber;

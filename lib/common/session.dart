@@ -23,9 +23,13 @@ class Session {
   }
 
   // 儲存使用者登入狀態
-  void saveSession() async {
+  void saveSession({String token = ''}) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('access_token', accessToken);
+    if (token.isNotEmpty) {
+      prefs.setString('access_token', token);
+    } else {
+      prefs.setString('access_token', accessToken);
+    }
     prefs.setString('epr_ru', eprRu);
   }
 

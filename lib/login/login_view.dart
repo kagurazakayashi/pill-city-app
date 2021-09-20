@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/login/login_c.dart';
-import 'package:pill_city/login/login_m.dart';
+import 'package:pill_city/login/login_data_request.dart';
+import 'package:pill_city/login/login_view_controller.dart';
+import 'package:pill_city/login/login_function.dart';
 
 class LoginView extends State<LoginViewController> {
-  Login f = Login();
+  final LoginFunction _f = LoginFunction();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
   bool _showPassword = false;
@@ -15,11 +16,12 @@ class LoginView extends State<LoginViewController> {
   }
 
   void btnLogin() {
-    f.btnLogin(context, _unameController.text, _pwdController.text);
+    _f.btnLogin(LoginDataRequest(_unameController.text, _pwdController.text));
   }
 
   @override
   Widget build(BuildContext context) {
+    _f.context = context;
     String strUserName = '用户名';
     String strPassword = '密码';
     return Scaffold(
@@ -28,7 +30,7 @@ class LoginView extends State<LoginViewController> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.login),
-            tooltip: 'Show Snackbar',
+            tooltip: '登录',
             onPressed: btnLogin,
           ),
         ],
@@ -94,7 +96,7 @@ class LoginView extends State<LoginViewController> {
                       ),
                     ),
                     validator: (v) {
-                      return f.chkUserName(v);
+                      return _f.chkUserName(v);
                     }),
                 TextFormField(
                   controller: _pwdController,
@@ -116,7 +118,7 @@ class LoginView extends State<LoginViewController> {
                   ),
                   obscureText: !_showPassword,
                   validator: (v) {
-                    return f.chkPassword(v);
+                    return _f.chkPassword(v);
                   },
                 ),
                 Padding(
@@ -127,11 +129,11 @@ class LoginView extends State<LoginViewController> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           TextButton(
-                            onPressed: f.btnForgetPassword,
+                            onPressed: _f.btnForgetPassword,
                             child: const Text('忘记密码'),
                           ),
                           TextButton(
-                            onPressed: f.btnRegister,
+                            onPressed: _f.btnRegister,
                             child: const Text('用户注册'),
                           ),
                         ],

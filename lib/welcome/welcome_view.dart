@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/welcome/welcome_c.dart';
-import 'package:pill_city/welcome/welcome_m.dart';
+import 'package:pill_city/welcome/welcome_view_controller.dart';
+import 'package:pill_city/welcome/welcome_function.dart';
 
 class WelcomeView extends State<WelcomeViewController> {
-  Welcome f = Welcome();
+  WelcomeFunction f = WelcomeFunction();
   String _version = "";
 
   @override
