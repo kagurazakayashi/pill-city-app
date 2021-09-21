@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:pill_city/bottom_navigation/bottom_navigation_view_controller.dart';
 import 'package:pill_city/common/network.dart';
 import 'package:pill_city/common/session.dart';
 import 'package:pill_city/login/login_data_request.dart';
@@ -87,7 +88,12 @@ class LoginFunction implements NetworkDelegate {
       Session sess = Session();
       sess.accessToken = data.accessToken;
       sess.saveSession();
-      // TODO: 移動到主畫面
+      // 移動到主畫面
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const BottomNavigationViewController()),
+          (route) => false);
     } else {
       ScaffoldMessenger.of(context).clearSnackBars();
       String alertInfo = '登录失败 ' + data.accessToken;

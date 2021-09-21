@@ -27,6 +27,7 @@ class LoginView extends State<LoginViewController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('登录'),
+        backgroundColor: Colors.red[400],
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.login),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pill_city/bottom_navigation/bottom_navigation_view_controller.dart';
 import 'package:pill_city/common/session.dart';
 import 'package:pill_city/welcome/welcome_view_controller.dart';
 
@@ -47,7 +48,12 @@ class _MyHomePageState extends State<MyHomePage> {
     Session session = Session();
     bool isLocalLogin = await session.isLocalLogin();
     if (isLocalLogin) {
-      // TODO: 移動到主畫面
+      // 移動到主畫面
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const BottomNavigationViewController()),
+          (route) => false);
     } else {
       // Navigator.pushReplacementNamed(context, WelcomeViewController, (route) => false)(
       //   context,
