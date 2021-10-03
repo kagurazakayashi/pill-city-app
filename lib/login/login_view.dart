@@ -9,10 +9,22 @@ class LoginView extends State<LoginViewController> {
   final TextEditingController _pwdController = TextEditingController();
   bool _showPassword = false;
   final bool _nameFocus = true;
+  final FocusNode _unameFocusNode = FocusNode();
+  final FocusNode _pwdFocusNode = FocusNode();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _unameFocusNode.dispose();
+    _pwdFocusNode.dispose();
+    _unameController.dispose();
+    _pwdController.dispose();
+    super.dispose();
   }
 
   void btnLogin() {
@@ -21,7 +33,7 @@ class LoginView extends State<LoginViewController> {
 
   @override
   Widget build(BuildContext context) {
-    _f.context = context;
+    _f.context ??= context;
     String strUserName = '用户名';
     String strPassword = '密码';
     return Scaffold(
@@ -36,7 +48,7 @@ class LoginView extends State<LoginViewController> {
           ),
         ],
       ),
-      body: Column(
+      body: ListView(
         children: <Widget>[
           Stack(
             children: [
@@ -77,9 +89,11 @@ class LoginView extends State<LoginViewController> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Column(
-              children: [
-                TextFormField(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
                     autofocus: _nameFocus,
                     controller: _unameController,
                     decoration: InputDecoration(
@@ -96,62 +110,66 @@ class LoginView extends State<LoginViewController> {
                         },
                       ),
                     ),
-                    validator: (v) {
-                      return _f.chkUserName(v);
-                    }),
-                TextFormField(
-                  controller: _pwdController,
-                  autofocus: !_nameFocus,
-                  decoration: InputDecoration(
-                    labelText: strPassword,
-                    hintText: strPassword,
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(_showPassword
-                          ? Icons.visibility_off
-                          : Icons.visibility),
-                      onPressed: () {
-                        setState(() {
-                          _showPassword = !_showPassword;
-                        });
-                      },
+                    validator: (value) {
+                      return _f.validateUsername(value);
+                    },
+                    onFieldSubmitted: (value) {
+                      print(value);
+                    },
+                  ),
+                  TextFormField(
+                      controller: _pwdController,
+                      autofocus: !_nameFocus,
+                      decoration: InputDecoration(
+                        labelText: strPassword,
+                        hintText: strPassword,
+                        prefixIcon: const Icon(Icons.lock),
+                        suffixIcon: IconButton(
+                          icon: Icon(_showPassword
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                          onPressed: () {
+                            setState(() {
+                              _showPassword = !_showPassword;
+                            });
+                          },
+                        ),
+                      ),
+                      obscureText: !_showPassword,
+                      validator: (value) {
+                        return _f.validatePassword(value);
+                      }),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Stack(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            TextButton(
+                              onPressed: _f.btnForgetPassword,
+                              child: const Text('忘记密码'),
+                            ),
+                            TextButton(
+                              onPressed: _f.btnRegister,
+                              child: const Text('用户注册'),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                              onPressed: btnLogin,
+                              child: const Text('　登录　'),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  obscureText: !_showPassword,
-                  validator: (v) {
-                    return _f.chkPassword(v);
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Stack(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          TextButton(
-                            onPressed: _f.btnForgetPassword,
-                            child: const Text('忘记密码'),
-                          ),
-                          TextButton(
-                            onPressed: _f.btnRegister,
-                            child: const Text('用户注册'),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ElevatedButton(
-                            onPressed: btnLogin,
-                            child: const Text('　登录　'),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
