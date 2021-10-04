@@ -1,6 +1,6 @@
 // 檢查是否存有使用者登入狀態
 import 'package:pill_city/common/global.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pill_city/common/preferences.dart';
 
 class Session {
   // 登入令牌 access_token
@@ -12,10 +12,9 @@ class Session {
 
   // 讀取使用者登入狀態，檢查是否存有使用者登入狀態
   Future<bool> isLocalLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-    accessToken = prefs.getString('access_token') ?? "";
-    eprRu = prefs.getString('epr_ru') ?? "";
-    Global.accessToken = accessToken;
+    accessToken = await sharedPreferencesGetString('access_token') ?? "";
+    eprRu = await sharedPreferencesGetString('epr_ru') ?? "";
+    g_accessToken = accessToken;
     if (accessToken.isNotEmpty) {
       return true;
     }
@@ -23,21 +22,19 @@ class Session {
   }
 
   // 儲存使用者登入狀態
-  void saveSession({String token = ''}) async {
-    final prefs = await SharedPreferences.getInstance();
+  void saveSession({String token = ''}) {
     if (token.isNotEmpty) {
-      prefs.setString('access_token', token);
+      sharedPreferencesSet('access_token', token);
     } else {
-      prefs.setString('access_token', accessToken);
+      sharedPreferencesSet('access_token', accessToken);
     }
-    prefs.setString('epr_ru', eprRu);
+    sharedPreferencesSet('epr_ru', eprRu);
   }
 
   // 移除使用者登入狀態
-  void removeSession() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove('access_token');
-    prefs.remove('epr_ru');
-    Global.accessToken = '';
+  void removeSession() {
+    sharedPreferencesSet('access_token', null);
+    sharedPreferencesSet('epr_ru', null);
+    g_accessToken = '';
   }
 }

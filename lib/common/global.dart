@@ -1,3 +1,1 @@
-class Global {
-  static String accessToken = '';
-}
+String g_accessToken = '';

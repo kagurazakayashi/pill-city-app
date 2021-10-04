@@ -1,10 +1,32 @@
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pill_city/bottom_navigation/bottom_navigation_view_controller.dart';
 import 'package:pill_city/common/session.dart';
+import 'package:pill_city/common/i18n_function.dart';
 import 'package:pill_city/welcome/welcome_view_controller.dart';
 
-void main() {
-  runApp(const PillCityAPP());
+Future<void> main() async {
+  var delegate = await LocalizationDelegate.create(
+      fallbackLocale: 'zh', supportedLocales: ['en', 'zh', 'zh-tw', 'ja']);
+  runApp(LocalizedApp(delegate, const PillCityAPP()));
+}
+
+class FallbackCupertinoLocalisationsDelegate
+    extends LocalizationsDelegate<CupertinoLocalizations> {
+  const FallbackCupertinoLocalisationsDelegate();
+
+  @override
+  bool isSupported(Locale locale) => true;
+
+  @override
+  Future<CupertinoLocalizations> load(Locale locale) =>
+      DefaultCupertinoLocalizations.load(locale);
+
+  @override
+  bool shouldReload(FallbackCupertinoLocalisationsDelegate old) => false;
 }
 
 class PillCityAPP extends StatelessWidget {
@@ -13,7 +35,18 @@ class PillCityAPP extends StatelessWidget {
   // 此部件是應用程式的根。
   @override
   Widget build(BuildContext context) {
+    var localizationDelegate = LocalizedApp.of(context).delegate;
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        localizationDelegate,
+        const FallbackCupertinoLocalisationsDelegate(),
+      ],
+      supportedLocales: localizationDelegate.supportedLocales,
+      locale: localizationDelegate.currentLocale,
+      builder: BotToastInit(),
+      navigatorObservers: [BotToastNavigatorObserver()],
       title: '',
       theme: ThemeData(
         // 這是應用程序的主題。
@@ -37,16 +70,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final Session _session = Session();
+
   @override
   void initState() {
     super.initState();
     chkLogin();
+    changeLocale(context, g_language);
   }
 
   // 檢查本地是否有登入狀態的記錄
   void chkLogin() async {
-    Session session = Session();
-    bool isLocalLogin = await session.isLocalLogin();
+    bool isLocalLogin = await _session.isLocalLogin();
     if (isLocalLogin) {
       // 移動到主畫面
       Navigator.pushAndRemoveUntil(
