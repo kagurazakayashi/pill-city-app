@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pill_city/common/i18n_function.dart';
+import 'package:pill_city/common/i18n_switch.dart';
 import 'package:pill_city/login/login_data_request.dart';
 import 'package:pill_city/login/login_view_controller.dart';
 import 'package:pill_city/login/login_function.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
-class LoginView extends State<LoginViewController> {
+class LoginView extends State<LoginViewController>
+    implements I18nSwitchDelegate {
   final LoginFunction _f = LoginFunction();
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
@@ -12,14 +16,19 @@ class LoginView extends State<LoginViewController> {
   final FocusNode _unameFocusNode = FocusNode();
   final FocusNode _pwdFocusNode = FocusNode();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final I18nSwitch _langSwitch = I18nSwitch();
+  PopupMenuButton? langPopMenuBtn;
 
   @override
   void initState() {
     super.initState();
+    langPopMenuBtn = _langSwitch.popupMenuButton();
+    _langSwitch.delegate = this;
   }
 
   @override
   void dispose() {
+    _langSwitch.delegate = null;
     _unameFocusNode.dispose();
     _pwdFocusNode.dispose();
     _unameController.dispose();
@@ -41,11 +50,7 @@ class LoginView extends State<LoginViewController> {
         title: const Text('登录'),
         backgroundColor: Colors.red[400],
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.login),
-            tooltip: '登录',
-            onPressed: btnLogin,
-          ),
+          langPopMenuBtn!,
         ],
       ),
       body: ListView(
@@ -175,5 +180,13 @@ class LoginView extends State<LoginViewController> {
         ],
       ),
     );
+  }
+
+  @override
+  i18nSwitchDelegateOnChange(String from, String to) {
+    setState(() {
+      changeLocale(context, to);
+      g_language = to;
+    });
   }
 }

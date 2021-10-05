@@ -38,6 +38,11 @@ dependencies:
   package_info: ^2.0.2
   url_launcher: ^6.0.12
   dio: ^4.0.0
+  bot_toast: ^4.0.1
+
+  flutter_localizations:
+    sdk: flutter
+  flutter_translate: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +73,10 @@ flutter:
   assets:
       - images/welcome.png
       - images/pill.png
+      - assets/i18n/en.json
+      - assets/i18n/zh.json
+      - assets/i18n/ja.json
+      - assets/i18n/zh-tw.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

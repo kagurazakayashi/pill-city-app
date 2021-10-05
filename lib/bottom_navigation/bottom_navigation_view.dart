@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pill_city/bottom_navigation/bottom_navigation_widget.dart';
 import 'package:pill_city/circles/circles_view.dart';
-import 'package:pill_city/home/home_view.dart';
+import 'package:pill_city/common/i18n_function.dart';
+import 'package:pill_city/common/i18n_switch.dart';
+import 'package:pill_city/home/home_view_controller.dart';
 import 'package:pill_city/notifications/notifications_view.dart';
 import 'package:pill_city/profile/profile_view.dart';
 
-class BottomNavigationView extends State<BottomNavigationWidget> {
+class BottomNavigationView extends State<BottomNavigationWidget>
+    implements I18nSwitchDelegate {
   int _selectedIndex = 0;
   static const List<String> pageName = ['主页', '圈子', '我的', '通知'];
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = [];
+  final I18nSwitch _langSwitch = I18nSwitch();
 
   BottomNavigationView() {
     _widgetOptions = <Widget>[
-      const HomeView(),
+      const HomeViewController(),
       const CirclesView(),
       const ProfileView(),
       const NotificationsView(),
     ];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _langSwitch.delegate = this;
+    _langSwitch.loadConfig();
   }
 
   void _onItemTapped(int index) {
@@ -60,5 +72,13 @@ class BottomNavigationView extends State<BottomNavigationWidget> {
         onTap: _onItemTapped,
       ),
     );
+  }
+
+  @override
+  i18nSwitchDelegateOnChange(String from, String to) {
+    setState(() {
+      changeLocale(context, to);
+      g_language = to;
+    });
   }
 }

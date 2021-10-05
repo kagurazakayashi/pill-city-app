@@ -1,15 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:pill_city/common/i18n_function.dart';
+import 'package:pill_city/common/i18n_switch.dart';
 import 'package:pill_city/welcome/welcome_view_controller.dart';
 import 'package:pill_city/welcome/welcome_function.dart';
 
-class WelcomeView extends State<WelcomeViewController> {
+class WelcomeView extends State<WelcomeViewController>
+    implements I18nSwitchDelegate {
   WelcomeFunction f = WelcomeFunction();
   String _version = "";
+  final I18nSwitch _langSwitch = I18nSwitch();
+  PopupMenuButton? langPopMenuBtn;
 
   @override
   void initState() {
     super.initState();
+    langPopMenuBtn = _langSwitch.popupMenuButton();
+    _langSwitch.delegate = this;
+    _langSwitch.loadConfig();
     getVersion();
+  }
+
+  @override
+  void dispose() {
+    _langSwitch.delegate = null;
+    super.dispose();
   }
 
   void getVersion() async {
@@ -25,7 +40,8 @@ class WelcomeView extends State<WelcomeViewController> {
     double bottomBarHeight = 150;
     double versionTop = screenSize.height - bottomBarHeight - 20;
     double subTitleTop = (screenSize.height - bottomBarHeight) / 2 - 30;
-    String subTitle = '再一次与你关心的人分享喜悦\n并探索属于你的热爱';
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+    String subTitle = tr("welcome.slogan");
     // PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return Material(
       child: Column(
@@ -37,6 +53,20 @@ class WelcomeView extends State<WelcomeViewController> {
                 width: screenSize.width,
                 height: screenSize.height - bottomBarHeight,
                 fit: BoxFit.cover,
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, statusBarHeight, 10, 0),
+                child: Row(
+                  children: <Widget>[
+                    const Spacer(),
+                    IconButton(
+                      tooltip: tr("welcome.proxy"),
+                      icon: const Icon(Icons.settings_ethernet),
+                      onPressed: () {},
+                    ),
+                    langPopMenuBtn!,
+                  ],
+                ),
               ),
               Container(
                 width: screenSize.width,
@@ -87,17 +117,29 @@ class WelcomeView extends State<WelcomeViewController> {
             child: Column(
               children: <Widget>[
                 ElevatedButton(
-                  child: const Text("　登录　"),
+                  child: Text("  " + tr("welcome.login") + "  "),
                   onPressed: () {
                     f.toLoginPage(context);
                   },
                 ),
-                TextButton(onPressed: () {}, child: const Text("使用条款"))
+                TextButton(
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text(tr("welcome.license")))
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  @override
+  i18nSwitchDelegateOnChange(String from, String to) {
+    setState(() {
+      changeLocale(context, to);
+      g_language = to;
+    });
   }
 }
