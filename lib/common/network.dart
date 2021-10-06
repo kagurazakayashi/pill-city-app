@@ -5,6 +5,8 @@ import 'package:dio/adapter.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
+import 'global.dart';
+
 abstract class NetworkDelegate {
   bool networkOnRequest(
       RequestOptions options, RequestInterceptorHandler handler);
@@ -45,23 +47,48 @@ class Network {
           return handler.next(options);
         }
       },
-      onResponse: (dynamic response, ResponseInterceptorHandler handler) {
+      onResponse:
+          (Response<dynamic> response, ResponseInterceptorHandler handler) {
         if (delegate != null) {
           delegate!.networkOnResponse(response.toString(), handler);
         }
+        return handler.next(response);
       },
       onError: (DioError error, ErrorInterceptorHandler handler) {
         if (delegate != null) {
           delegate!.networkOnError(error.message, handler);
         }
+        return handler.next(error);
       },
     ));
   }
 
-  Future<void> postJson(String url, Map<String, dynamic>? parameters) async {
+  Future<void> gjson(
+      bool isPost, String url, Map<String, dynamic>? parameters) async {
+    _dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (req, hand) async {
+        hand.next(req);
+      },
+      onResponse: (req, hand) async {
+        hand.next(req);
+      },
+      onError: (req, hand) async {
+        hand.next(req);
+      },
+    ));
     try {
-      String jsonStr = jsonEncode(parameters);
-      response = await _dio.post(url, data: jsonStr);
+      String jsonStr = parameters == null ? "" : jsonEncode(parameters);
+      if (g_accessToken.isNotEmpty) {
+        _dio.options.headers.clear();
+        // _dio.options.headers["Content-Type"]="application/json";
+        _dio.options.headers["Authorization"] = "Bearer " + g_accessToken;
+        print(_dio.options.headers);
+      }
+      if (isPost) {
+        response = await _dio.post(url, data: jsonStr);
+      } else {
+        response = await _dio.get(url);
+      }
     } catch (e) {
       if (delegate != null) {
         delegate!.networkOnError(e.toString(), null);
