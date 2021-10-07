@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pill_city/bottom_navigation/bottom_navigation_view_controller.dart';
-import 'package:pill_city/common/global.dart';
+import 'package:pill_city/common/i18n_function.dart';
 import 'package:pill_city/common/network.dart';
 import 'package:pill_city/common/session.dart';
 import 'package:pill_city/login/login_data_request.dart';
@@ -16,62 +16,27 @@ class LoginFunction implements NetworkDelegate {
     net.delegate = this;
   }
 
-  bool chkUserNameB(String? v) {
-    if (v == null) {
-      return false;
-    }
-    if (v.isEmpty) {
-      return false;
-    }
-    return true;
-  }
-
-  String chkUserName(String? v) {
-    return chkUserNameB(v) ? '' : '请输入用户名';
-  }
-
-  bool chkPasswordB(String? v) {
-    if (v == null) {
-      return false;
-    }
-    if (v.isEmpty) {
-      return false;
-    }
-    return true;
-  }
-
-  String chkPassword(String? v) {
-    return chkPasswordB(v) ? '' : '请输入密码';
-  }
-
-  void chkUsernameAndPassword(BuildContext context,
-      GlobalKey<FormState> formKey, String username, String password) {
-    final FormState? form = formKey.currentState;
-    if (!form!.validate()) {
-      print('ERR');
-    }
-    // if (!chkUserNameB(username) || !chkUserNameB(password)) {
-    // ScaffoldMessenger.of(context).clearSnackBars();
-    // ScaffoldMessenger.of(context)
-    //     .showSnackBar(const SnackBar(content: Text('用户名或密码不能为空')));
-    //   return false;
-    // }
-    // return true;
-  }
-
   String? validateUsername(String? value) {
+    String lengthErr = tr('login.usernamelen');
     if (value!.isEmpty) {
-      return '用户名不能为空';
+      return lengthErr;
     }
-    // if...
+    int valLen = value.length;
+    if (valLen < 3 || valLen > 16) {
+      return lengthErr;
+    }
     return null;
   }
 
   String? validatePassword(String? value) {
+    String lengthErr = tr('login.passwordlen');
     if (value!.isEmpty) {
-      return '密码不能为空';
+      return lengthErr;
     }
-    // if...
+    int valLen = value.length;
+    if (valLen < 6 || valLen > 512) {
+      return lengthErr;
+    }
     return null;
   }
 
@@ -89,9 +54,9 @@ class LoginFunction implements NetworkDelegate {
     //   return;
     // }
     // 顯示處理中對話方塊
-    net.showLoadingDialog(context!, "正在登录");
+    net.showLoadingDialog(context!, tr('login.loggingin') + '...');
     // 向伺服器傳送登入請求 -> 等待網路類呼叫 NetworkDelegate
-    net.gjson(true,data.url, data.toMap());
+    net.gjson(true, data.url, data.toMap());
   }
 
   @override
@@ -117,7 +82,7 @@ class LoginFunction implements NetworkDelegate {
           (route) => false);
     } else {
       ScaffoldMessenger.of(context!).clearSnackBars();
-      String alertInfo = '登录失败 ' + data.accessToken;
+      String alertInfo = tr('login.loginfailed') + data.accessToken;
       ScaffoldMessenger.of(context!)
           .showSnackBar(SnackBar(content: Text(alertInfo)));
     }
@@ -127,7 +92,7 @@ class LoginFunction implements NetworkDelegate {
   @override
   void networkOnError(String error, ErrorInterceptorHandler? handler) {
     ScaffoldMessenger.of(context!).clearSnackBars();
-    String alertInfo = '网络操作失败: ' + error;
+    String alertInfo = tr('login.networkerr') + ': ' + error;
     ScaffoldMessenger.of(context!)
         .showSnackBar(SnackBar(content: Text(alertInfo)));
   }

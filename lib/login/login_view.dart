@@ -43,11 +43,11 @@ class LoginView extends State<LoginViewController>
   @override
   Widget build(BuildContext context) {
     _f.context ??= context;
-    String strUserName = '用户名';
-    String strPassword = '密码';
+    String strUserName = tr('login.username');
+    String strPassword = tr('login.password');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('登录'),
+        title: Text(tr('login.signin')),
         backgroundColor: Colors.red[400],
         actions: <Widget>[
           langPopMenuBtn!,
@@ -72,18 +72,18 @@ class LoginView extends State<LoginViewController>
                 padding: const EdgeInsets.fromLTRB(30.0, 55.0, 0, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      'Welcome back to',
+                      tr('login.welcome'),
                       textAlign: TextAlign.left,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 25.0,
                       ),
                     ),
                     Text(
-                      'Pill City',
+                      tr('login.appname'),
                       textAlign: TextAlign.left,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 60.0,
                       ),
                     ),
@@ -153,11 +153,11 @@ class LoginView extends State<LoginViewController>
                           children: [
                             TextButton(
                               onPressed: _f.btnForgetPassword,
-                              child: const Text('忘记密码'),
+                              child: Text(tr('login.forgot')),
                             ),
                             TextButton(
                               onPressed: _f.btnRegister,
-                              child: const Text('用户注册'),
+                              child: Text(tr('login.signup')),
                             ),
                           ],
                         ),
@@ -166,7 +166,7 @@ class LoginView extends State<LoginViewController>
                           children: [
                             ElevatedButton(
                               onPressed: btnLogin,
-                              child: const Text('　登录　'),
+                              child: Text(' ' + tr('login.signin') + ' '),
                             ),
                           ],
                         ),
