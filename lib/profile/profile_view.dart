@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:pill_city/profile/profile_function.dart';
+import 'package:pill_city/profile/profile_view_controller.dart';
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({Key? key}) : super(key: key);
+class ProfileView extends State<ProfileViewController> {
+  final ProfileFunction _f = ProfileFunction();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

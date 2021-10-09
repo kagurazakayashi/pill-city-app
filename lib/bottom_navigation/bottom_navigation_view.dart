@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pill_city/bottom_navigation/bottom_navigation_widget.dart';
-import 'package:pill_city/circles/circles_view.dart';
+import 'package:pill_city/circles/circles_view_controller.dart';
 import 'package:pill_city/common/i18n_function.dart';
 import 'package:pill_city/common/i18n_switch.dart';
 import 'package:pill_city/home/home_view_controller.dart';
-import 'package:pill_city/notifications/notifications_view.dart';
-import 'package:pill_city/profile/profile_view.dart';
+import 'package:pill_city/notifications/notifications_view_controller.dart';
+import 'package:pill_city/profile/profile_view_controller.dart';
 
 class BottomNavigationView extends State<BottomNavigationWidget>
     implements I18nSwitchDelegate {
@@ -20,9 +20,9 @@ class BottomNavigationView extends State<BottomNavigationWidget>
   BottomNavigationView() {
     _widgetOptions = <Widget>[
       const HomeViewController(),
-      const CirclesView(),
-      const ProfileView(),
-      const NotificationsView(),
+      const CirclesViewController(),
+      const ProfileViewController(),
+      const NotificationsViewController(),
     ];
   }
 

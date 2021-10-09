@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:pill_city/circles/circles_function.dart';
+import 'package:pill_city/circles/circles_view_controller.dart';
 
-class CirclesView extends StatelessWidget {
-  const CirclesView({Key? key}) : super(key: key);
+class CirclesView extends State<CirclesViewController> {
+  final CirclesFunction _f = CirclesFunction();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
