@@ -1,5 +1,5 @@
 // 檢查是否存有使用者登入狀態
-import 'package:pill_city/common/global.dart';
+import 'package:pill_city/data/global.dart';
 import 'package:pill_city/common/preferences.dart';
 
 class Session {

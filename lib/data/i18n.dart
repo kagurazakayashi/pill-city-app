@@ -1,5 +1,15 @@
 Map i18ndata = {
   'en': {
+    'network': {
+      'error': 'Communication failure: ',
+      'connectTimeout': 'URL is opened timeout.',
+      'sendTimeout': 'URL is sent timeout.',
+      'receiveTimeout': 'Receiving timeout.',
+      'response': 'Server response status is incorrect.',
+      'code': ' Error code: ',
+      'cancel': 'Request is cancelled.',
+      'other': 'Network Error.',
+    },
     'welcome': {
       'login': 'login',
       'license': 'license',
@@ -20,7 +30,6 @@ Map i18ndata = {
       'forgot': 'Forgot?',
       'loggingin': 'logging in',
       'loginfailed': 'Login failed',
-      'networkerr': 'Network Error',
     },
     'bottomtab': {
       'home': 'Home',
@@ -30,6 +39,16 @@ Map i18ndata = {
     },
   },
   'zh': {
+    'network': {
+      'error': '网络通信失败: ',
+      'connectTimeout': '连接到服务器超时。',
+      'sendTimeout': '数据发送超时。',
+      'receiveTimeout': '数据接收超时。',
+      'response': '服务器响应状态不正确。',
+      'code': ' 错误代码: ',
+      'cancel': '网络请求被取消。',
+      'other': '通信故障。',
+    },
     'welcome': {
       'login': '登录',
       'license': '使用条款',
@@ -59,6 +78,16 @@ Map i18ndata = {
     },
   },
   'zh-tw': {
+    'network': {
+      'error': '網路通訊失敗: ',
+      'connectTimeout': '連線到伺服器超時。',
+      'sendTimeout': '資料傳送超時。',
+      'receiveTimeout': '資料接收超時。',
+      'response': '伺服器響應狀態不正確。',
+      'code': ' 錯誤碼: ',
+      'cancel': '網路請求被取消。',
+      'other': '通訊故障。',
+    },
     'welcome': {
       'login': '登入',
       'license': '使用條款',
@@ -88,6 +117,16 @@ Map i18ndata = {
     },
   },
   'ja': {
+    'network': {
+      'error': '通信障害: ',
+      'connectTimeout': 'URLはタイムアウトで開かれます。',
+      'sendTimeout': 'URLはタイムアウトで送信されます。',
+      'receiveTimeout': '受信タイムアウト。',
+      'response': 'サーバーの応答ステータスが正しくありません。',
+      'code': ' エラーコード: ',
+      'cancel': 'リクエストはキャンセルされます。',
+      'other': 'ネットワークエラー。',
+    },
     'welcome': {
       'login': 'ログイン',
       'license': '許可',

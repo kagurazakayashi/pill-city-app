@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:pill_city/common/i18n_function.dart';
+import 'package:pill_city/common/i18n_function/i18n_function.dart';
 import 'package:pill_city/common/preferences.dart';
 
 abstract class I18nSwitchDelegate {

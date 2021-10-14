@@ -1,5 +1,5 @@
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:pill_city/common/i18n.dart';
+import 'package:pill_city/data/i18n.dart';
 
 String g_language = 'zh';
 

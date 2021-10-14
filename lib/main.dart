@@ -5,7 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pill_city/bottom_navigation/bottom_navigation_view_controller.dart';
 import 'package:pill_city/common/session.dart';
-import 'package:pill_city/common/i18n_function.dart';
+import 'package:pill_city/common/i18n_function/i18n_function.dart';
 import 'package:pill_city/welcome/welcome_view_controller.dart';
 
 Future<void> main() async {
