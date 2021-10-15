@@ -4,3 +4,8 @@ enum NetworkStatus {
   response,
   error,
 }
+
+enum NetworkProxyMode {
+  defaultMode,
+  http,
+}

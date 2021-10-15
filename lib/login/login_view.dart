@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/common/i18n_function.dart';
-import 'package:pill_city/common/i18n_switch.dart';
+import 'package:pill_city/common/i18n_function/i18n_function.dart';
+import 'package:pill_city/common/i18n_function/i18n_switch.dart';
 import 'package:pill_city/login/login_data_request.dart';
 import 'package:pill_city/login/login_view_controller.dart';
 import 'package:pill_city/login/login_function.dart';
@@ -50,6 +50,13 @@ class LoginView extends State<LoginViewController>
         title: Text(tr('login.signin')),
         backgroundColor: Colors.red[400],
         actions: <Widget>[
+          IconButton(
+            tooltip: tr("welcome.proxy"),
+            icon: const Icon(Icons.settings_ethernet),
+            onPressed: () {
+              _f.toProxyPage(context);
+            },
+          ),
           langPopMenuBtn!,
         ],
       ),
@@ -117,9 +124,6 @@ class LoginView extends State<LoginViewController>
                     ),
                     validator: (value) {
                       return _f.validateUsername(value);
-                    },
-                    onFieldSubmitted: (value) {
-                      print(value);
                     },
                   ),
                   TextFormField(

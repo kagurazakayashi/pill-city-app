@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pill_city/bottom_navigation/bottom_navigation_view_controller.dart';
-import 'package:pill_city/common/i18n_function.dart';
-import 'package:pill_city/common/network.dart';
+import 'package:pill_city/common/i18n_function/i18n_function.dart';
+import 'package:pill_city/common/network/network.dart';
+import 'package:pill_city/common/network/network_delegate.dart';
+import 'package:pill_city/common/network/network_error.dart';
 import 'package:pill_city/common/session.dart';
 import 'package:pill_city/login/login_data_request.dart';
 import 'package:pill_city/login/login_data_response.dart';
+import 'package:pill_city/settings/proxy/proxy_view_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginFunction implements NetworkDelegate {
@@ -49,14 +52,15 @@ class LoginFunction implements NetworkDelegate {
   }
 
   void btnLogin(LoginDataRequest data) {
-    // 預先檢查輸入
-    // if (!chkUsernameAndPassword(context!, data.id, data.password)) {
-    //   return;
-    // }
     // 顯示處理中對話方塊
     net.showLoadingDialog(context!, tr('login.loggingin') + '...');
     // 向伺服器傳送登入請求 -> 等待網路類呼叫 NetworkDelegate
     net.gjson(true, data.url, data.toMap());
+  }
+
+  void toProxyPage(BuildContext context) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const ProxyViewController()));
   }
 
   @override
@@ -66,7 +70,7 @@ class LoginFunction implements NetworkDelegate {
   }
 
   @override
-  void networkOnResponse(String response, ResponseInterceptorHandler handler) {
+  void networkOnResponse(dynamic response, ResponseInterceptorHandler handler) {
     net.showLoadingDialog(context!, "");
     LoginDataResponse data = LoginDataResponse(response);
     if (data.accessToken.isNotEmpty) {
@@ -90,10 +94,13 @@ class LoginFunction implements NetworkDelegate {
   }
 
   @override
-  void networkOnError(String error, ErrorInterceptorHandler? handler) {
+  void networkOnError(
+      NetworkError errorInfos, ErrorInterceptorHandler? handler) {
+    net.showLoadingDialog(context!, '');
     ScaffoldMessenger.of(context!).clearSnackBars();
-    String alertInfo = tr('login.networkerr') + ': ' + error;
+    String alertInfo = errorInfos.localizedMessage();
     ScaffoldMessenger.of(context!)
         .showSnackBar(SnackBar(content: Text(alertInfo)));
+    print(errorInfos.message);
   }
 }

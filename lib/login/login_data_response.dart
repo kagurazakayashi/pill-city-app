@@ -17,7 +17,6 @@ class LoginDataResponse {
       accessToken = jsonResponse['access_token'];
     } catch (e) {
       plainTextOnErr = response;
-      print(e);
       return;
     }
   }

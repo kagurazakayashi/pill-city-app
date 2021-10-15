@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:pill_city/common/i18n_function.dart';
-import 'package:pill_city/common/i18n_switch.dart';
+import 'package:pill_city/common/i18n_function/i18n_function.dart';
+import 'package:pill_city/common/i18n_function/i18n_switch.dart';
 import 'package:pill_city/welcome/welcome_view_controller.dart';
 import 'package:pill_city/welcome/welcome_function.dart';
 
@@ -62,7 +62,9 @@ class WelcomeView extends State<WelcomeViewController>
                     IconButton(
                       tooltip: tr("welcome.proxy"),
                       icon: const Icon(Icons.settings_ethernet),
-                      onPressed: () {},
+                      onPressed: () {
+                        f.toProxyPage(context);
+                      },
                     ),
                     langPopMenuBtn!,
                   ],

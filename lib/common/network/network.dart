@@ -24,12 +24,14 @@ class Network {
     // 設定代理伺服器
     (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
-      client.findProxy = (uri) {
-        return "PROXY 192.168.1.45:23333";
-      };
+      if (g_proxy[0] == 'http') {
+        client.findProxy = (uri) {
+          return "PROXY ${g_proxy[1]}:${g_proxy[2]}";
+        };
+      }
       client.badCertificateCallback =
           (X509Certificate cert, String host, int port) {
-        return true;
+        return g_proxy[3].isEmpty;
       };
     };
     // 設定監聽事件

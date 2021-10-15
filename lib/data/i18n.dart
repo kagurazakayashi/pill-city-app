@@ -10,6 +10,20 @@ Map i18ndata = {
       'cancel': 'Request is cancelled.',
       'other': 'Network Error.',
     },
+    'setting': {
+      'proxy': {
+        'setting': 'Network settings',
+        'proxy': 'Proxy server',
+        'enable': 'Custom HTTP proxy server',
+        'ip': 'Proxy server address',
+        'port': 'Port number',
+        'porterr': 'Invalid port number',
+        'sys': 'System proxy settings',
+        'http': 'Custom HTTP proxy',
+        'security': 'Communication security',
+        'httpscert': 'Verify HTTPS certificate',
+      },
+    },
     'welcome': {
       'login': 'login',
       'license': 'license',
@@ -48,6 +62,20 @@ Map i18ndata = {
       'code': ' 错误代码: ',
       'cancel': '网络请求被取消。',
       'other': '通信故障。',
+    },
+    'setting': {
+      'proxy': {
+        'setting': '网络设置',
+        'proxy': '代理服务器',
+        'enable': '使用自定义 HTTP 代理服务器',
+        'ip': '代理服务器地址',
+        'port': '端口号',
+        'porterr': '无效端口号',
+        'sys': '使用系统代理设置',
+        'http': '自定义 HTTP 代理',
+        'security': '通信安全',
+        'httpscert': '验证 HTTPS 证书',
+      },
     },
     'welcome': {
       'login': '登录',
@@ -88,6 +116,20 @@ Map i18ndata = {
       'cancel': '網路請求被取消。',
       'other': '通訊故障。',
     },
+    'setting': {
+      'proxy': {
+        'setting': '網路設定',
+        'proxy': '代理伺服器',
+        'enable': '使用自定義 HTTP 代理伺服器',
+        'ip': '代理伺服器地址',
+        'port': '埠號',
+        'porterr': '無效埠號',
+        'sys': '使用系統代理設定',
+        'http': '自定義 HTTP 代理',
+        'security': '通訊安全',
+        'httpscert': '驗證 HTTPS 證書',
+      },
+    },
     'welcome': {
       'login': '登入',
       'license': '使用條款',
@@ -126,6 +168,20 @@ Map i18ndata = {
       'code': ' エラーコード: ',
       'cancel': 'リクエストはキャンセルされます。',
       'other': 'ネットワークエラー。',
+    },
+    'setting': {
+      'proxy': {
+        'setting': 'ネットワーク設定',
+        'proxy': 'プロキシサーバー',
+        'enable': 'カスタムHTTPプロキシサーバー',
+        'ip': 'プロキシサーバーアドレス',
+        'port': 'ポート番号',
+        'porterr': '無効なポート番号',
+        'sys': 'システム設定を使用する',
+        'http': 'カスタム HTTP プロキシ',
+        'security': '通信セキュリティ',
+        'httpscert': 'HTTPS証明書を確認する',
+      },
     },
     'welcome': {
       'login': 'ログイン',
