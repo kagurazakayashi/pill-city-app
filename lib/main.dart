@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pill_city/bottom_navigation/bottom_navigation_view_controller.dart';
+import 'package:pill_city/common/preferences.dart';
 import 'package:pill_city/common/session.dart';
 import 'package:pill_city/common/i18n_function/i18n_function.dart';
+import 'package:pill_city/data/global.dart';
 import 'package:pill_city/welcome/welcome_view_controller.dart';
 
 Future<void> main() async {
@@ -75,8 +77,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    chkLogin();
     changeLocale(context, g_language);
+    loadSettingProxy();
+    chkLogin();
+  }
+
+  void loadSettingProxy() async {
+    List<dynamic>? proxySet = await sharedPreferencesGetList('proxy');
+    if (proxySet != null) {
+      g_proxy = proxySet as List<String>;
+    }
   }
 
   // 檢查本地是否有登入狀態的記錄

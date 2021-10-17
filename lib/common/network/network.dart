@@ -20,7 +20,7 @@ class Network {
     _dio.options.receiveTimeout = 3000; // 接收資料的最長時限（毫秒）
     _dio.options.baseUrl = 'https://api.pill.city';
     _dio.options.contentType = "application/json; charset=utf-8";
-    // _dio.options.responseType = ResponseType.plain;
+    _dio.options.responseType = ResponseType.plain;
     // 設定代理伺服器
     (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
@@ -54,6 +54,7 @@ class Network {
         return handler.next(response);
       },
       onError: (DioError error, ErrorInterceptorHandler handler) {
+        print('[NETWORK ERROR] ' + error.message);
         if (delegate != null) {
           NetworkError errorInfos = NetworkError(error.message);
           if (error.response != null && error.response!.statusCode != null) {
@@ -91,20 +92,24 @@ class Network {
       String jsonStr = parameters == null ? "" : jsonEncode(parameters);
       if (g_accessToken.isNotEmpty) {
         _dio.options.headers.clear();
-        // _dio.options.headers["Content-Type"]="application/json";
+        _dio.options.headers["Content-Type"] =
+            "application/json"; // "multipart/form-data"
         _dio.options.headers["Authorization"] = "Bearer " + g_accessToken;
-        // print(_dio.options.headers);
       }
       if (isPost) {
-        response = await _dio.post(url, data: jsonStr);
+        if (jsonStr.isEmpty) {
+          response = await _dio.post(url);
+        } else {
+          response = await _dio.post(url, data: jsonStr);
+        }
       } else {
         response = await _dio.get(url);
       }
     } catch (e) {
-      if (delegate != null) {
-        NetworkError errorInfos = NetworkError(e.toString());
-        delegate!.networkOnError(errorInfos, null);
-      }
+      // if (delegate != null) {
+      //   NetworkError errorInfos = NetworkError(e.toString());
+      //   delegate!.networkOnError(errorInfos, null);
+      // }
     }
   }
 

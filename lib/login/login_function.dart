@@ -71,6 +71,7 @@ class LoginFunction implements NetworkDelegate {
 
   @override
   void networkOnResponse(dynamic response, ResponseInterceptorHandler handler) {
+    print(response);
     net.showLoadingDialog(context!, "");
     LoginDataResponse data = LoginDataResponse(response);
     if (data.accessToken.isNotEmpty) {
