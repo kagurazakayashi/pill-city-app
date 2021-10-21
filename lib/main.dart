@@ -83,9 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void loadSettingProxy() async {
-    List<dynamic>? proxySet = await sharedPreferencesGetList('proxy');
-    if (proxySet != null) {
-      g_proxy = proxySet as List<String>;
+    List<String>? proxySet = await sharedPreferencesGetList('proxy');
+    if (proxySet != null && proxySet.length == g_proxy.length) {
+      g_proxy = proxySet;
     }
   }
 
