@@ -8,17 +8,24 @@ class ProxyFunction {
   BuildContext? context;
 
   String? validateIp(String? value) {
-    // return lengthErr;
+    if (value == null ||
+        value.isEmpty ||
+        value.length < 7 ||
+        value.length > 39 ||
+        (!(value.contains(".") && RegExp(r"^[0-9.]+$").hasMatch(value)) ||
+            (value.contains(":") &&
+                RegExp(r"^[ZA-ZZa-z0-9.:]+$").hasMatch(value)))) {
+      return tr('setting.proxy.iperr');
+    }
     return null;
   }
 
   String? validatePort(String? value) {
-    if (value != null && value.isNotEmpty) {
-      int portnum = int.parse(value);
-      if (portnum < 0 || portnum > 65535) {
-        return tr('setting.proxy.porterr');
-      }
-    } else {
+    if (value == null || value.isEmpty || value.length > 5) {
+      return tr('setting.proxy.porterr');
+    }
+    int portnum = int.parse(value);
+    if (portnum <= 0 || portnum > 65535) {
       return tr('setting.proxy.porterr');
     }
     return null;
@@ -47,7 +54,7 @@ class ProxyFunction {
     } else {
       g_proxy[0] = '';
     }
-    g_proxy[1] = (validateIp(ip) != null) ? '' : ip;
+    g_proxy[1] = (validateIp(ip) != null) ? '' : ip.toUpperCase();
     g_proxy[2] = (validatePort(port) != null) ? '' : port;
     if (g_proxy[1].isEmpty || g_proxy[2].isEmpty) {
       g_proxy[0] = '';
