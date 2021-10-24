@@ -14,6 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 class LoginFunction implements NetworkDelegate {
   Network net = Network();
   BuildContext? context;
+  Session _sess = Session();
 
   LoginFunction() {
     net.delegate = this;
@@ -54,6 +55,8 @@ class LoginFunction implements NetworkDelegate {
   void btnLogin(LoginDataRequest data) {
     // 顯示處理中對話方塊
     net.showLoadingDialog(context!, tr('login.loggingin') + '...');
+    // 移除使用者登入狀態
+    _sess.removeSession();
     // 向伺服器傳送登入請求 -> 等待網路類呼叫 NetworkDelegate
     net.gjson(true, data.url, data.toMap());
   }
@@ -71,14 +74,12 @@ class LoginFunction implements NetworkDelegate {
 
   @override
   void networkOnResponse(dynamic response, ResponseInterceptorHandler handler) {
-    print(response);
     net.showLoadingDialog(context!, "");
     LoginDataResponse data = LoginDataResponse(response);
     if (data.accessToken.isNotEmpty) {
       // 如果伺服器正確返回了令牌，將令牌儲存到本地
-      Session sess = Session();
-      sess.accessToken = data.accessToken;
-      sess.saveSession();
+      _sess.accessToken = data.accessToken;
+      _sess.saveSession();
       // 移動到主畫面
       Navigator.pushAndRemoveUntil(
           context!,

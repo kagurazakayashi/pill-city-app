@@ -24,8 +24,10 @@ class Session {
   // 儲存使用者登入狀態
   void saveSession({String token = ''}) {
     if (token.isNotEmpty) {
+      g_accessToken = token;
       sharedPreferencesSet('access_token', token);
     } else {
+      g_accessToken = accessToken;
       sharedPreferencesSet('access_token', accessToken);
     }
     sharedPreferencesSet('epr_ru', eprRu);
