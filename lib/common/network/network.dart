@@ -88,28 +88,22 @@ class Network {
 
   Future<void> gjson(
       bool isPost, String url, Map<String, dynamic>? parameters) async {
-    try {
-      String jsonStr = parameters == null ? "" : jsonEncode(parameters);
-      if (g_accessToken.isNotEmpty) {
-        _dio.options.headers.clear();
-        _dio.options.headers["Content-Type"] =
-            "application/json"; // "multipart/form-data"
-        _dio.options.headers["Authorization"] = "Bearer " + g_accessToken;
-      }
-      if (isPost) {
-        if (jsonStr.isEmpty) {
-          response = await _dio.post(url);
-        } else {
-          response = await _dio.post(url, data: jsonStr);
-        }
+    String jsonStr = parameters == null ? "" : jsonEncode(parameters);
+    _dio.options.headers.clear();
+    _dio.options.headers["Content-Type"] =
+        "application/json"; // "multipart/form-data"
+    _dio.options.headers["User-Agent"] = g_ua;
+    if (g_accessToken.isNotEmpty) {
+      _dio.options.headers["Authorization"] = "Bearer " + g_accessToken;
+    }
+    if (isPost) {
+      if (jsonStr.isEmpty) {
+        response = await _dio.post(url);
       } else {
-        response = await _dio.get(url);
+        response = await _dio.post(url, data: jsonStr);
       }
-    } catch (e) {
-      // if (delegate != null) {
-      //   NetworkError errorInfos = NetworkError(e.toString());
-      //   delegate!.networkOnError(errorInfos, null);
-      // }
+    } else {
+      response = await _dio.get(url);
     }
   }
 
