@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:package_info/package_info.dart';
 import 'package:pill_city/bottom_navigation/bottom_navigation_view_controller.dart';
 import 'package:pill_city/common/preferences.dart';
 import 'package:pill_city/common/session.dart';
@@ -78,15 +81,25 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     changeLocale(context, g_language);
-    loadSettingProxy();
+    loadSetting();
     chkLogin();
   }
 
-  void loadSettingProxy() async {
+  void loadSetting() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    g_version = [
+      packageInfo.version,
+      packageInfo.buildNumber,
+      packageInfo.packageName,
+      packageInfo.appName,
+    ];
     List<String>? proxySet = await sharedPreferencesGetList('proxy');
     if (proxySet != null && proxySet.length == g_proxy.length) {
       g_proxy = proxySet;
     }
+    g_ua =
+        "PillCityAPP/${g_version[0]} (${Platform.operatingSystem}/${Platform.operatingSystemVersion})";
+    print(g_ua);
   }
 
   // 檢查本地是否有登入狀態的記錄

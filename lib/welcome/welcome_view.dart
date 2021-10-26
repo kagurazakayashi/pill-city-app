@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pill_city/common/i18n_function/i18n_function.dart';
 import 'package:pill_city/common/i18n_function/i18n_switch.dart';
+import 'package:pill_city/data/global.dart';
 import 'package:pill_city/welcome/welcome_view_controller.dart';
 import 'package:pill_city/welcome/welcome_function.dart';
 
@@ -27,8 +28,8 @@ class WelcomeView extends State<WelcomeViewController>
     super.dispose();
   }
 
-  void getVersion() async {
-    String packageInfo = await f.getVersion();
+  void getVersion() {
+    String packageInfo = "${g_version[0]}(${g_version[1]})";
     setState(() {
       _version = packageInfo;
     });
