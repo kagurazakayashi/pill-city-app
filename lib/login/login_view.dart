@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pill_city/common/i18n_function/i18n_function.dart';
 import 'package:pill_city/common/i18n_function/i18n_switch.dart';
+import 'package:pill_city/data/global.dart';
 import 'package:pill_city/login/login_data_request.dart';
 import 'package:pill_city/login/login_view_controller.dart';
 import 'package:pill_city/login/login_function.dart';

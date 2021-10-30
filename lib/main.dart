@@ -9,7 +9,6 @@ import 'package:package_info/package_info.dart';
 import 'package:pill_city/bottom_navigation/bottom_navigation_view_controller.dart';
 import 'package:pill_city/common/preferences.dart';
 import 'package:pill_city/common/session.dart';
-import 'package:pill_city/common/i18n_function/i18n_function.dart';
 import 'package:pill_city/data/global.dart';
 import 'package:pill_city/welcome/welcome_view_controller.dart';
 

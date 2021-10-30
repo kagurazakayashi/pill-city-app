@@ -4,8 +4,6 @@ import 'package:pill_city/data/i18n/i18n_ja.dart';
 import 'package:pill_city/data/i18n/i18n_zhhans.dart';
 import 'package:pill_city/data/i18n/i18n_zhhant.dart';
 
-String g_language = 'zh_Hans';
-
 String tr(String key) {
   List tarr = [translate('l')];
   tarr.addAll(key.split("."));

@@ -1,3 +1,4 @@
+String g_language = 'zh_Hans';
 String g_accessToken = '';
 List<String> g_proxy = [
   '', // 0 mode

@@ -92,6 +92,7 @@ class Network {
     _dio.options.headers.clear();
     _dio.options.headers["Content-Type"] =
         "application/json"; // "multipart/form-data"
+    _dio.options.headers["accept-language"] = g_language;
     _dio.options.headers["User-Agent"] = g_ua;
     if (g_accessToken.isNotEmpty) {
       _dio.options.headers["Authorization"] = "Bearer " + g_accessToken;
