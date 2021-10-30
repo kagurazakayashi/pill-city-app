@@ -15,7 +15,8 @@ import 'package:pill_city/welcome/welcome_view_controller.dart';
 
 Future<void> main() async {
   var delegate = await LocalizationDelegate.create(
-      fallbackLocale: 'zh', supportedLocales: ['en', 'zh', 'zh-tw', 'ja']);
+      fallbackLocale: 'zh_Hans',
+      supportedLocales: ['en', 'zh_Hans', 'zh_Hant', 'ja']);
   runApp(LocalizedApp(delegate, const PillCityAPP()));
 }
 

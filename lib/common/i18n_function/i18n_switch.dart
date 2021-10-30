@@ -13,8 +13,8 @@ class I18nSwitch {
   BuildContext? context;
   List<List<String>> languages = [
     ["en", "English"],
-    ["zh", "简体中文"],
-    ["zh-tw", "繁體中文"],
+    ["zh_Hans", "简体中文"],
+    ["zh_Hant", "繁體中文"],
     ["ja", "日本語"],
   ];
 
