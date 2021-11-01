@@ -25,7 +25,7 @@ class HomeListView extends State<HomeListViewController>
 
   @override
   Widget build(BuildContext context) {
-    _f.context ??= context;
+    _f.setContext(context);
     return Stack(
       fit: StackFit.passthrough,
       children: [

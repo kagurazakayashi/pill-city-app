@@ -19,6 +19,11 @@ class HomeListViewFunction implements TimeLineFunctionDelegate {
     _d.delegate = this;
   }
 
+  void setContext(BuildContext uiContext) {
+    context ??= uiContext;
+    _d.context ??= uiContext;
+  }
+
   void getTimeline() {
     _d.getTimeline();
   }
