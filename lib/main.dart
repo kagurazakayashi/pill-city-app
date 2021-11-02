@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
       packageInfo.packageName,
       packageInfo.appName,
     ];
-    List<String>? proxySet = await sharedPreferencesGetList('proxy');
+    List<String>? proxySet = await sharedPreferencesGetStringList('proxy');
     if (proxySet != null && proxySet.length == g_proxy.length) {
       g_proxy = proxySet;
     }
