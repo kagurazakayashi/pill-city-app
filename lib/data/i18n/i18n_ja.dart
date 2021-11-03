@@ -10,7 +10,7 @@ Map i18ndataJa = {
     'other': 'ネットワークエラー。',
   },
   'setting': {
-    'proxy': {
+    'network': {
       'setting': 'ネットワーク設定',
       'proxy': 'プロキシサーバー',
       'enable': 'カスタムHTTPプロキシサーバー',
@@ -20,8 +20,10 @@ Map i18ndataJa = {
       'porterr': '無効なポート番号',
       'sys': 'システム設定を使用する',
       'http': 'カスタム HTTP プロキシ',
-      'security': '通信セキュリティ',
+      'transmission': 'データ送信',
       'httpscert': 'HTTPS証明書を確認する',
+      'timeout': 'ネットワークタイムアウト（5-60 秒）',
+      'timeouterr': '5から60までの整数を入力してください',
     },
   },
   'welcome': {

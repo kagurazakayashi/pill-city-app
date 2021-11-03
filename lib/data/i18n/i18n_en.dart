@@ -10,7 +10,7 @@ Map i18ndataEn = {
     'other': 'Network Error.',
   },
   'setting': {
-    'proxy': {
+    'network': {
       'setting': 'Network settings',
       'proxy': 'Proxy server',
       'enable': 'Custom HTTP proxy server',
@@ -20,8 +20,10 @@ Map i18ndataEn = {
       'porterr': 'Invalid port number',
       'sys': 'System proxy settings',
       'http': 'Custom HTTP proxy',
-      'security': 'Communication security',
+      'transmission': 'Data transmission',
       'httpscert': 'Verify HTTPS certificate',
+      'timeout': 'Network timeout (5-60 seconds)',
+      'timeouterr': 'Please enter an integer between 5 and 60',
     },
   },
   'welcome': {

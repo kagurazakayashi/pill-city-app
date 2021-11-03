@@ -4,6 +4,7 @@ import 'package:pill_city/common/network/network.dart';
 import 'package:pill_city/common/network/network_delegate.dart';
 import 'package:pill_city/common/network/network_enum_status.dart';
 import 'package:pill_city/common/network/network_error.dart';
+import 'package:pill_city/data/global.dart';
 import 'package:pill_city/data_moudle/data_post.dart';
 import 'package:pill_city/home/home_data_response.dart';
 
@@ -20,7 +21,7 @@ class TimelineFunction implements NetworkDelegate {
     if (delegate != null) {
       delegate!.onCommunicating(NetworkStatus.start);
     }
-    net.gjson(false, 'https://api.pill.city/api/home', null);
+    net.gjson(false, g_apiHost + '/api/home', null);
   }
 
   TimelineFunction() {

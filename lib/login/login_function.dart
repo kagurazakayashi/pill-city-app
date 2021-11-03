@@ -8,7 +8,7 @@ import 'package:pill_city/common/network/network_error.dart';
 import 'package:pill_city/common/session.dart';
 import 'package:pill_city/login/login_data_request.dart';
 import 'package:pill_city/login/login_data_response.dart';
-import 'package:pill_city/settings/proxy/proxy_view_controller.dart';
+import 'package:pill_city/settings/network/proxy_view_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginFunction implements NetworkDelegate {

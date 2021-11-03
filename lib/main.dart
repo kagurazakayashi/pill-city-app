@@ -97,6 +97,12 @@ class _MyHomePageState extends State<MyHomePage> {
     if (proxySet != null && proxySet.length == g_proxy.length) {
       g_proxy = proxySet;
     }
+    List<int>? netTimeoutSet =
+        await sharedPreferencesGetIntList('networkTimeout');
+    if (netTimeoutSet != null &&
+        netTimeoutSet.length == g_networkTimeout.length) {
+      g_networkTimeout = netTimeoutSet;
+    }
     g_ua =
         "PillCityAPP/${g_version[0]} (${Platform.operatingSystem}/${Platform.operatingSystemVersion})";
     print(g_ua);

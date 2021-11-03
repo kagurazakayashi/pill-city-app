@@ -16,9 +16,9 @@ class Network {
   Response? response;
 
   Network() {
-    _dio.options.connectTimeout = 10000; // 連線伺服器超時時間（毫秒）
-    _dio.options.receiveTimeout = 10000; // 接收資料的最長時限（毫秒）
-    _dio.options.baseUrl = 'https://api.pill.city';
+    _dio.options.connectTimeout = g_networkTimeout[0]; // 連線伺服器超時時間（毫秒）
+    _dio.options.receiveTimeout = g_networkTimeout[1]; // 接收資料的最長時限（毫秒）
+    _dio.options.baseUrl = g_apiHost;
     _dio.options.contentType = "application/json; charset=utf-8";
     _dio.options.responseType = ResponseType.plain;
     // 設定代理伺服器

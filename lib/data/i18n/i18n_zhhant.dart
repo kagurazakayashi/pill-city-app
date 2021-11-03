@@ -10,7 +10,7 @@ Map i18ndataZhHant = {
     'other': '通訊故障。',
   },
   'setting': {
-    'proxy': {
+    'network': {
       'setting': '網路設定',
       'proxy': '代理伺服器',
       'enable': '使用自定義 HTTP 代理伺服器',
@@ -20,8 +20,10 @@ Map i18ndataZhHant = {
       'porterr': '無效埠號',
       'sys': '使用系統代理設定',
       'http': '自定義 HTTP 代理',
-      'security': '通訊安全',
+      'transmission': '資料傳輸',
       'httpscert': '驗證 HTTPS 證書',
+      'timeout': '網路超時時間（5-60 秒）',
+      'timeouterr': '請輸入 5 到 60 之間的整數',
     },
   },
   'welcome': {

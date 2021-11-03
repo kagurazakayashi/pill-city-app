@@ -10,7 +10,7 @@ Map i18ndataZhHans = {
     'other': '通信故障。',
   },
   'setting': {
-    'proxy': {
+    'network': {
       'setting': '网络设置',
       'proxy': '代理服务器',
       'enable': '使用自定义 HTTP 代理服务器',
@@ -20,8 +20,10 @@ Map i18ndataZhHans = {
       'porterr': '无效端口号',
       'sys': '使用系统代理设置',
       'http': '自定义 HTTP 代理',
-      'security': '通信安全',
+      'transmission': '数据传输',
       'httpscert': '验证 HTTPS 证书',
+      'timeout': '网络超时时间（5-60 秒）',
+      'timeouterr': '请输入 5 到 60 之间的整数',
     },
   },
   'welcome': {
