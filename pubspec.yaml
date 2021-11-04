@@ -43,6 +43,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_translate: ^3.0.1
+  cached_network_image: ^3.1.0+1
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
   assets:
       - images/welcome.png
       - images/pill.png
+      - images/kusuou.png
       - assets/i18n/en.json
       - assets/i18n/zh_Hans.json
       - assets/i18n/ja.json

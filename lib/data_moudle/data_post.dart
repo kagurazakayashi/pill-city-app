@@ -20,14 +20,15 @@ class DataPost {
   late bool is_update_avatar;
 
   DataPost(Map<String, dynamic> data) {
-
     id = data['id'];
     created_at_seconds = data['created_at_seconds'];
     author = DataAuthor(data['author']);
     content = data['content'];
     is_public = data['is_public'];
     reshareable = data['reshareable'];
-    reshared_from = data['reshared_from'] != null ? DataReshared(data['reshared_from']) : null;
+    reshared_from = data['reshared_from'] != null
+        ? DataReshared(data['reshared_from'])
+        : null;
     media_urls = data['media_urls'];
     for (var e in (data['reactions'] as List)) {
       Reaction reaction = Reaction(e);

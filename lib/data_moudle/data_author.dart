@@ -9,7 +9,7 @@ class DataAuthor {
   DataAuthor(Map<String, dynamic> data) {
     id = data['id'];
     created_at_seconds = data['created_at_seconds'].toInt();
-    avatar_url = data['avatar_url'] ?? 'https://pill.city/kusuou.png';
+    avatar_url = data['avatar_url'] ?? '';
     profile_pic = data['profile_pic'];
     display_name = data['display_name'] ?? id;
   }
