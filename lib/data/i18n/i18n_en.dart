@@ -53,4 +53,7 @@ Map i18ndataEn = {
     'profile': 'Profile',
     'notifications': 'Notifications',
   },
+  'post': {
+    'public': 'Public',
+  },
 };

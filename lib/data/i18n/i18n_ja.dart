@@ -53,4 +53,7 @@ Map i18ndataJa = {
     'profile': 'プロフィール',
     'notifications': '通知',
   },
+  'post': {
+    'public': '公衆',
+  },
 };

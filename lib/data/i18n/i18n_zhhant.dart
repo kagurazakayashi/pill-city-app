@@ -53,4 +53,7 @@ Map i18ndataZhHant = {
     'profile': '我的',
     'notifications': '通知',
   },
+  'post': {
+    'public': '公開',
+  },
 };

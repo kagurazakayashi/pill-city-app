@@ -45,4 +45,18 @@ class DataPost {
     deleted = data['deleted'];
     is_update_avatar = data['is_update_avatar'];
   }
+
+  String circlesString() {
+    String circleNames = '';
+    bool first = true;
+    for (Circle circle in circles) {
+      if (first) {
+        first = false;
+      } else {
+        circleNames += ", ";
+      }
+      circleNames += circle.name;
+    }
+    return circleNames;
+  }
 }
