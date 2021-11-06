@@ -53,6 +53,17 @@ Map i18ndataEn = {
     'profile': 'Profile',
     'notifications': 'Notifications',
   },
+  'time': {
+    'just': 'just',
+    'minute': 'minute',
+    'minutes': 'minutes',
+    'hour': 'hour',
+    'hours': 'hours',
+    'day': 'day',
+    'days': 'days',
+    'ago': ' ago',
+    'datesym': '/',
+  },
   'post': {
     'public': 'Public',
   },

@@ -74,7 +74,7 @@ flutter:
   assets:
       - images/welcome.png
       - images/pill.png
-      - images/kusuou.png
+      - images/user.png
       - assets/i18n/en.json
       - assets/i18n/zh_Hans.json
       - assets/i18n/ja.json

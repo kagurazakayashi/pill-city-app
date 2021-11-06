@@ -53,6 +53,17 @@ Map i18ndataZhHans = {
     'profile': '我的',
     'notifications': '通知',
   },
+  'time': {
+    'just': '刚刚',
+    'minute': '分钟',
+    'minutes': '分钟',
+    'hour': '小时',
+    'hours': '小时',
+    'day': '天',
+    'days': '天',
+    'ago': '前',
+    'datesym': '-',
+  },
   'post': {
     'public': '公开',
   },

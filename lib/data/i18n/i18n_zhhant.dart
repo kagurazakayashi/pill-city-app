@@ -53,6 +53,17 @@ Map i18ndataZhHant = {
     'profile': '我的',
     'notifications': '通知',
   },
+  'time': {
+    'just': '剛剛',
+    'minute': '分鐘',
+    'minutes': '分鐘',
+    'hour': '小時',
+    'hours': '小時',
+    'day': '天',
+    'days': '天',
+    'ago': '前',
+    'datesym': '-',
+  },
   'post': {
     'public': '公開',
   },

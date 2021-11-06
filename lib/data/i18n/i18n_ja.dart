@@ -53,6 +53,17 @@ Map i18ndataJa = {
     'profile': 'プロフィール',
     'notifications': '通知',
   },
+  'time': {
+    'just': 'ただ',
+    'minute': '分',
+    'minutes': '分',
+    'hour': '時間',
+    'hours': '時間',
+    'day': '日',
+    'days': '日',
+    'ago': '前',
+    'datesym': '-',
+  },
   'post': {
     'public': '公衆',
   },

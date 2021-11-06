@@ -2,9 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pill_city/common/i18n_function/i18n_function.dart';
 import 'package:pill_city/data_moudle/data_post.dart';
+import 'package:pill_city/home/post_function.dart';
 import 'package:pill_city/home/timeline_one/timeline_block/home_block_view_controller.dart';
 
 class HomeBlockView extends State<HomeBlockViewController> {
+  final PostFunction _f = PostFunction();
+
   @override
   void initState() {
     super.initState();
@@ -49,12 +52,12 @@ class HomeBlockView extends State<HomeBlockViewController> {
                             ),
                           ),
                         ),
-                        // 轉圈等待
+                        // 等待
                         placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
+                            Image.asset('images/user.png'),
                         // 無頭像
                         errorWidget: (context, url, error) => Image.asset(
-                          'images/kusuou.png',
+                          'images/user.png',
                         ),
                       ),
                     ),
@@ -64,6 +67,7 @@ class HomeBlockView extends State<HomeBlockViewController> {
                         // 頭像右側兩行資訊
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // 頭像右側第 1 行
                           Row(
                             children: [
                               Text(
@@ -84,7 +88,7 @@ class HomeBlockView extends State<HomeBlockViewController> {
                               Text(
                                 post.is_public
                                     ? tr("post.public")
-                                    : post.circlesString(),
+                                    : _f.circlesString(post.circles),
                                 textAlign: TextAlign.left,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -96,13 +100,17 @@ class HomeBlockView extends State<HomeBlockViewController> {
                               ),
                             ],
                           ),
+                          // 頭像右側第 2 行
                           Row(
                             children: [
                               Text(
-                                post.created_at_seconds.toString(),
+                                _f.timeStr(post.created_at_seconds),
                                 textAlign: TextAlign.left,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                ),
                               ),
                             ],
                           ),
@@ -124,7 +132,9 @@ class HomeBlockView extends State<HomeBlockViewController> {
           ),
           Row(
             children: [
-              Expanded(child: Text(post.content)),
+              Expanded(
+                child: Text(post.content),
+              ),
             ],
           ),
         ],
