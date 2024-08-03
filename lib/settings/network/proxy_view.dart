@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/common/i18n_function/i18n_function.dart';
-import 'package:pill_city/common/network/network_enum_status.dart';
-import 'package:pill_city/data/global.dart';
-import 'package:pill_city/settings/network/proxy_function.dart';
-import 'package:pill_city/settings/network/proxy_view_controller.dart';
+import 'package:pillcity/common/i18n_function/i18n_function.dart';
+import 'package:pillcity/common/network/network_enum_status.dart';
+import 'package:pillcity/data/global.dart';
+import 'package:pillcity/settings/network/proxy_function.dart';
+import 'package:pillcity/settings/network/proxy_view_controller.dart';
 
 class ProxyView extends State<ProxyViewController> {
   final ProxyFunction _f = ProxyFunction();
@@ -36,9 +36,13 @@ class ProxyView extends State<ProxyViewController> {
   @override
   Widget build(BuildContext context) {
     _f.context ??= context;
-    return WillPopScope(
-      onWillPop: () => _f.willPop(_proxyMode, _ipController.text,
-          _portController.text, _chkCertificate, _timeoutController.text),
+    return PopScope(
+      onPopInvoked: (bool isPop) {
+        if (isPop) {
+          _f.willPop(_proxyMode, _ipController.text, _portController.text,
+              _chkCertificate, _timeoutController.text);
+        }
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Text(tr('setting.network.setting')),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/profile/profile_function.dart';
-import 'package:pill_city/profile/profile_view_controller.dart';
+import 'package:pillcity/profile/profile_function.dart';
+import 'package:pillcity/profile/profile_view_controller.dart';
 
 class ProfileView extends State<ProfileViewController> {
   final ProfileFunction _f = ProfileFunction();

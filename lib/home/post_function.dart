@@ -1,5 +1,5 @@
-import 'package:pill_city/common/i18n_function/i18n_function.dart';
-import 'package:pill_city/data_moudle/data_circles.dart';
+import 'package:pillcity/common/i18n_function/i18n_function.dart';
+import 'package:pillcity/data_moudle/data_circles.dart';
 
 class PostFunction {
   /// 根據貼文的 [circles] 欄位列出所有分享圈子的集合字串，例如 "圈子1, 圈子2"
@@ -33,17 +33,17 @@ class PostFunction {
       // x 分鐘前
       int tInt = (distance / 60).floor();
       String tStr = tInt > 1 ? tr("time.minutes") : tr("time.minute");
-      return tInt.toString() + " " + tStr + tr("time.ago");
+      return "$tInt $tStr${tr("time.ago")}";
     } else if (distance <= 86400) {
       // x 小時前
       int tInt = (distance / 60 / 60).floor();
       String tStr = tInt > 1 ? tr("time.hours") : tr("time.hour");
-      return tInt.toString() + " " + tStr + tr("time.ago");
+      return "$tInt $tStr${tr("time.ago")}";
     } else if (distance <= 172800) {
       // x 天前
       int tInt = (distance / 60 / 60 / 24).floor();
       String tStr = tInt > 1 ? tr("time.days") : tr("time.day");
-      return tInt.toString() + " " + tStr + tr("time.ago");
+      return "$tInt $tStr${tr("time.ago")}";
     } else if (DateTime.fromMillisecondsSinceEpoch(nowTimeStamp * 1000).year ==
         DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000).year) {
       // 同年的就不寫年份了

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:pill_city/data_moudle/data_post.dart';
+import 'package:pillcity/data_moudle/data_post.dart';
 
 class HomeDataResponse {
   List<DataPost> posts = <DataPost>[];

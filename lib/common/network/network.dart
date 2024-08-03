@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dio/adapter.dart';
+import 'package:dio/io.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:pill_city/common/network/network_delegate.dart';
-import 'package:pill_city/common/network/network_enum_status.dart';
-import 'package:pill_city/common/network/network_error.dart';
-import 'package:pill_city/data/global.dart';
+import 'package:pillcity/common/network/network_delegate.dart';
+import 'package:pillcity/common/network/network_error.dart';
+import 'package:pillcity/data/global.dart';
 
 class Network {
   NetworkDelegate? delegate;
@@ -16,24 +16,27 @@ class Network {
   Response? response;
 
   Network() {
-    _dio.options.connectTimeout = g_networkTimeout[0]; // 連線伺服器超時時間（毫秒）
-    _dio.options.receiveTimeout = g_networkTimeout[1]; // 接收資料的最長時限（毫秒）
+    _dio.options.connectTimeout =
+        Duration(milliseconds: g_networkTimeout[0]); // 連線伺服器超時時間（毫秒）
+    _dio.options.receiveTimeout =
+        Duration(milliseconds: g_networkTimeout[1]); // 接收資料的最長時限（毫秒）
     _dio.options.baseUrl = g_apiHost;
     _dio.options.contentType = "application/json; charset=utf-8";
     _dio.options.responseType = ResponseType.plain;
     // 設定代理伺服器
-    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (HttpClient client) {
-      if (g_proxy[0] == 'http') {
+    _dio.httpClientAdapter = IOHttpClientAdapter(
+      createHttpClient: () {
+        final client = HttpClient();
         client.findProxy = (uri) {
           return "PROXY ${g_proxy[1]}:${g_proxy[2]}";
         };
-      }
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) {
-        return g_proxy[3].isEmpty;
-      };
-    };
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) {
+          return g_proxy[3].isEmpty;
+        };
+        return client;
+      },
+    );
     // 設定監聽事件
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
@@ -53,31 +56,41 @@ class Network {
         }
         return handler.next(response);
       },
-      onError: (DioError error, ErrorInterceptorHandler handler) {
-        print('[NETWORK ERROR] ' + error.message);
+      onError: (DioException error, ErrorInterceptorHandler handler) {
         if (delegate != null) {
-          NetworkError errorInfos = NetworkError(error.message);
+          NetworkError errorInfos = NetworkError(error.message ?? "");
           if (error.response != null && error.response!.statusCode != null) {
             errorInfos.code = error.response!.statusCode!;
           }
           switch (error.type) {
-            case DioErrorType.cancel:
-              errorInfos.type = 'cancel';
+            case DioExceptionType.connectionTimeout:
+              errorInfos.type = 'connectionTimeout';
               break;
-            case DioErrorType.connectTimeout:
-              errorInfos.type = 'connectTimeout';
-              break;
-            case DioErrorType.receiveTimeout:
-              errorInfos.type = 'receiveTimeout';
-              break;
-            case DioErrorType.response:
-              errorInfos.type = 'response';
-              break;
-            case DioErrorType.sendTimeout:
+            case DioExceptionType.sendTimeout:
               errorInfos.type = 'sendTimeout';
               break;
-            default:
+            case DioExceptionType.receiveTimeout:
+              errorInfos.type = 'receiveTimeout';
               break;
+            case DioExceptionType.badCertificate:
+              errorInfos.type = 'badCertificate';
+              break;
+            case DioExceptionType.badResponse:
+              errorInfos.type = 'badResponse';
+              break;
+            case DioExceptionType.cancel:
+              errorInfos.type = 'cancel';
+              break;
+            case DioExceptionType.connectionError:
+              errorInfos.type = 'connectionError';
+              break;
+            default:
+              errorInfos.type = 'unknown';
+              break;
+          }
+          if (kDebugMode) {
+            print(
+                '[NETWORK ERROR] [${errorInfos.type}] ${error.requestOptions.uri} : ${error.message}');
           }
           delegate!.networkOnError(errorInfos, handler);
         }
@@ -95,7 +108,7 @@ class Network {
     _dio.options.headers["accept-language"] = g_language;
     _dio.options.headers["User-Agent"] = g_ua;
     if (g_accessToken.isNotEmpty) {
-      _dio.options.headers["Authorization"] = "Bearer " + g_accessToken;
+      _dio.options.headers["Authorization"] = "Bearer $g_accessToken";
     }
     if (isPost) {
       if (jsonStr.isEmpty) {

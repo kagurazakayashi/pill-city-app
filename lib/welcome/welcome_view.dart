@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:pill_city/common/i18n_function/i18n_function.dart';
-import 'package:pill_city/common/i18n_function/i18n_switch.dart';
-import 'package:pill_city/data/global.dart';
-import 'package:pill_city/welcome/welcome_view_controller.dart';
-import 'package:pill_city/welcome/welcome_function.dart';
+import 'package:pillcity/common/i18n_function/i18n_function.dart';
+import 'package:pillcity/common/i18n_function/i18n_switch.dart';
+import 'package:pillcity/data/global.dart';
+import 'package:pillcity/welcome/welcome_view_controller.dart';
+import 'package:pillcity/welcome/welcome_function.dart';
 
 class WelcomeView extends State<WelcomeViewController>
     implements I18nSwitchDelegate {
@@ -30,8 +31,9 @@ class WelcomeView extends State<WelcomeViewController>
 
   void getVersion() {
     String packageInfo = "${g_version[0]}(${g_version[1]})";
+    String debugMode = kDebugMode ? "(Debug Mode)" : "";
     setState(() {
-      _version = packageInfo;
+      _version = "$packageInfo $debugMode";
     });
   }
 
@@ -120,7 +122,7 @@ class WelcomeView extends State<WelcomeViewController>
             child: Column(
               children: <Widget>[
                 ElevatedButton(
-                  child: Text("  " + tr("welcome.login") + "  "),
+                  child: Text("  ${tr("welcome.login")}  "),
                   onPressed: () {
                     f.toLoginPage(context);
                   },

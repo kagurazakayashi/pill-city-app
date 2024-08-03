@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:pill_city/common/network/network.dart';
-import 'package:pill_city/common/network/network_delegate.dart';
-import 'package:pill_city/common/network/network_enum_status.dart';
-import 'package:pill_city/common/network/network_error.dart';
-import 'package:pill_city/data/global.dart';
-import 'package:pill_city/data_moudle/data_post.dart';
-import 'package:pill_city/home/home_data_response.dart';
+import 'package:pillcity/common/network/network.dart';
+import 'package:pillcity/common/network/network_delegate.dart';
+import 'package:pillcity/common/network/network_enum_status.dart';
+import 'package:pillcity/common/network/network_error.dart';
+import 'package:pillcity/data/global.dart';
+import 'package:pillcity/data_moudle/data_post.dart';
+import 'package:pillcity/home/home_data_response.dart';
 
 abstract class TimeLineFunctionDelegate {
   void onCommunicating(NetworkStatus status);
@@ -21,7 +21,7 @@ class TimelineFunction implements NetworkDelegate {
     if (delegate != null) {
       delegate!.onCommunicating(NetworkStatus.start);
     }
-    net.gjson(false, g_apiHost + '/api/home', null);
+    net.gjson(false, '$g_apiHost/api/home', null);
   }
 
   TimelineFunction() {

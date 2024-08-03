@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:pill_city/bottom_navigation/bottom_navigation_widget.dart';
-import 'package:pill_city/circles/circles_view_controller.dart';
-import 'package:pill_city/common/i18n_function/i18n_switch.dart';
-import 'package:pill_city/data/global.dart';
-import 'package:pill_city/home/home_view_controller.dart';
-import 'package:pill_city/notifications/notifications_view_controller.dart';
-import 'package:pill_city/profile/profile_view_controller.dart';
+import 'package:pillcity/bottom_navigation/bottom_navigation_widget.dart';
+import 'package:pillcity/circles/circles_view_controller.dart';
+import 'package:pillcity/common/i18n_function/i18n_switch.dart';
+import 'package:pillcity/data/global.dart';
+import 'package:pillcity/home/home_view_controller.dart';
+import 'package:pillcity/notifications/notifications_view_controller.dart';
+import 'package:pillcity/profile/profile_view_controller.dart';
 
 class BottomNavigationView extends State<BottomNavigationWidget>
     implements I18nSwitchDelegate {

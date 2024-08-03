@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/circles/circles_function.dart';
-import 'package:pill_city/circles/circles_view_controller.dart';
+import 'package:pillcity/circles/circles_function.dart';
+import 'package:pillcity/circles/circles_view_controller.dart';
 
 class CirclesView extends State<CirclesViewController> {
   final CirclesFunction _f = CirclesFunction();

@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pill_city/common/i18n_function/i18n_function.dart';
-import 'package:pill_city/data_moudle/data_post.dart';
-import 'package:pill_city/home/post_function.dart';
-import 'package:pill_city/home/timeline_one/timeline_block/home_block_view_controller.dart';
+import 'package:pillcity/common/i18n_function/i18n_function.dart';
+import 'package:pillcity/data_moudle/data_post.dart';
+import 'package:pillcity/home/post_function.dart';
+import 'package:pillcity/home/timeline_one/timeline_block/home_block_view_controller.dart';
 
 class HomeBlockView extends State<HomeBlockViewController> {
   final PostFunction _f = PostFunction();
@@ -41,7 +41,7 @@ class HomeBlockView extends State<HomeBlockViewController> {
                           const BoxConstraints(maxHeight: 50, maxWidth: 50),
                       child: CachedNetworkImage(
                         // 頭像
-                        imageUrl: post.author.avatar_url,
+                        imageUrl: post.author.avatarURL,
                         // 圆角用w
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
@@ -72,7 +72,7 @@ class HomeBlockView extends State<HomeBlockViewController> {
                             children: [
                               Text(
                                 // 使用者暱稱
-                                post.author.display_name,
+                                post.author.displayName,
                                 textAlign: TextAlign.left,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -81,19 +81,19 @@ class HomeBlockView extends State<HomeBlockViewController> {
                               Icon(
                                 Icons.play_arrow,
                                 color:
-                                    post.is_public ? Colors.blue : Colors.green,
+                                    post.isPublic ? Colors.blue : Colors.green,
                                 size: 15.0,
                               ),
                               // 分享範圍
                               Text(
-                                post.is_public
+                                post.isPublic
                                     ? tr("post.public")
                                     : _f.circlesString(post.circles),
                                 textAlign: TextAlign.left,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  color: post.is_public
+                                  color: post.isPublic
                                       ? Colors.blue
                                       : Colors.green,
                                 ),
@@ -104,7 +104,7 @@ class HomeBlockView extends State<HomeBlockViewController> {
                           Row(
                             children: [
                               Text(
-                                _f.timeStr(post.created_at_seconds),
+                                _f.timeStr(post.createdAtSeconds),
                                 textAlign: TextAlign.left,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,

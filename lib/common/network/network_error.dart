@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'package:pill_city/common/i18n_function/i18n_function.dart';
+import 'package:pillcity/common/i18n_function/i18n_function.dart';
 
 class NetworkError {
   String type = 'other';
@@ -12,7 +12,7 @@ class NetworkError {
   }
 
   String localizedMessage() {
-    String alertInfo = tr('network.error') + tr('network.' + type);
+    String alertInfo = tr('network.error') + tr('network.$type');
     if (type == 'response' && code > 0) {
       alertInfo += tr('network.code') + code.toString();
     }

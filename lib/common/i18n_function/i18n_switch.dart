@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/common/preferences.dart';
-import 'package:pill_city/data/global.dart';
+import 'package:pillcity/common/preferences.dart';
+import 'package:pillcity/data/global.dart';
 
 abstract class I18nSwitchDelegate {
   i18nSwitchDelegateOnChange(String from, String to);
@@ -37,8 +37,8 @@ class I18nSwitch {
         List<PopupMenuEntry<dynamic>> items = [];
         for (List<String> language in languages) {
           items.add(PopupMenuItem(
-            child: Text(language[1]),
             value: language[0],
+            child: Text(language[1]),
           ));
         }
         return items;

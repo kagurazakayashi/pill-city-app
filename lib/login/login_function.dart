@@ -1,20 +1,21 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:pill_city/bottom_navigation/bottom_navigation_view_controller.dart';
-import 'package:pill_city/common/i18n_function/i18n_function.dart';
-import 'package:pill_city/common/network/network.dart';
-import 'package:pill_city/common/network/network_delegate.dart';
-import 'package:pill_city/common/network/network_error.dart';
-import 'package:pill_city/common/session.dart';
-import 'package:pill_city/login/login_data_request.dart';
-import 'package:pill_city/login/login_data_response.dart';
-import 'package:pill_city/settings/network/proxy_view_controller.dart';
+import 'package:pillcity/bottom_navigation/bottom_navigation_view_controller.dart';
+import 'package:pillcity/common/i18n_function/i18n_function.dart';
+import 'package:pillcity/common/network/network.dart';
+import 'package:pillcity/common/network/network_delegate.dart';
+import 'package:pillcity/common/network/network_error.dart';
+import 'package:pillcity/common/session.dart';
+import 'package:pillcity/login/login_data_request.dart';
+import 'package:pillcity/login/login_data_response.dart';
+import 'package:pillcity/settings/network/proxy_view_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginFunction implements NetworkDelegate {
   Network net = Network();
   BuildContext? context;
-  Session _sess = Session();
+  final Session _sess = Session();
 
   LoginFunction() {
     net.delegate = this;
@@ -44,17 +45,26 @@ class LoginFunction implements NetworkDelegate {
     return null;
   }
 
+  void launchURL(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else if (kDebugMode) {
+      print('[ERROR] Could not launch $uri');
+    }
+  }
+
   void btnForgetPassword() {
-    launch('https://pill.city/');
+    launchURL('https://pill.city/');
   }
 
   void btnRegister() {
-    launch('https://pill.city/signup');
+    launchURL('https://pill.city/signup');
   }
 
   void btnLogin(LoginDataRequest data) {
     // 顯示處理中對話方塊
-    net.showLoadingDialog(context!, tr('login.loggingin') + '...');
+    net.showLoadingDialog(context!, '${tr('login.loggingin')}...');
     // 移除使用者登入狀態
     _sess.removeSession();
     // 向伺服器傳送登入請求 -> 等待網路類呼叫 NetworkDelegate
@@ -103,6 +113,8 @@ class LoginFunction implements NetworkDelegate {
     String alertInfo = errorInfos.localizedMessage();
     ScaffoldMessenger.of(context!)
         .showSnackBar(SnackBar(content: Text(alertInfo)));
-    print(errorInfos.message);
+    if (kDebugMode) {
+      print(errorInfos.message);
+    }
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/common/i18n_function/i18n_function.dart';
-import 'package:pill_city/home/home_function.dart';
-import 'package:pill_city/home/home_view_controller.dart';
-import 'package:pill_city/home/timeline_one/home_list_view_controller.dart';
+import 'package:pillcity/common/i18n_function/i18n_function.dart';
+import 'package:pillcity/home/home_function.dart';
+import 'package:pillcity/home/home_view_controller.dart';
+import 'package:pillcity/home/timeline_one/home_list_view_controller.dart';
 
 class HomeView extends State<HomeViewController> {
   final HomeFunction _f = HomeFunction();
@@ -41,8 +41,8 @@ class HomeView extends State<HomeViewController> {
       body: _homeListViewController,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: const Icon(Icons.edit),
         backgroundColor: Colors.red[400],
+        child: const Icon(Icons.edit),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/notifications/notifications_function.dart';
-import 'package:pill_city/notifications/notifications_view_controller.dart';
+import 'package:pillcity/notifications/notifications_function.dart';
+import 'package:pillcity/notifications/notifications_view_controller.dart';
 
 class NotificationsView extends State<NotificationsViewController> {
   final NotificationsFunction _f = NotificationsFunction();

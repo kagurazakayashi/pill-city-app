@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/home/timeline_one/timeline_block/home_block_view_controller.dart';
-import 'package:pill_city/home/timeline_one/home_list_view_controller.dart';
-import 'package:pill_city/home/timeline_one/home_list_view_function.dart';
+import 'package:pillcity/home/timeline_one/timeline_block/home_block_view_controller.dart';
+import 'package:pillcity/home/timeline_one/home_list_view_controller.dart';
+import 'package:pillcity/home/timeline_one/home_list_view_function.dart';
 
 class HomeListView extends State<HomeListViewController>
     implements HomeListViewFunctionDelegate {

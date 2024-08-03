@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/login/login_view.dart';
+import 'package:pillcity/login/login_view.dart';
 
 class LoginViewController extends StatefulWidget {
-  const LoginViewController({Key? key}) : super(key: key);
+  const LoginViewController({super.key});
 
   @override
   State<LoginViewController> createState() => LoginView();

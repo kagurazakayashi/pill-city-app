@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/common/i18n_function/i18n_function.dart';
-import 'package:pill_city/common/network/network_enum_status.dart';
-import 'package:pill_city/common/preferences.dart';
-import 'package:pill_city/data/global.dart';
+import 'package:pillcity/common/i18n_function/i18n_function.dart';
+import 'package:pillcity/common/network/network_enum_status.dart';
+import 'package:pillcity/common/preferences.dart';
+import 'package:pillcity/data/global.dart';
 
 class ProxyFunction {
   BuildContext? context;
@@ -72,7 +72,7 @@ class ProxyFunction {
         (validateTimeout(timeout) != null) ? 10000 : int.parse(timeout) * 1000;
     g_networkTimeout = [timeoutSec, timeoutSec];
     sharedPreferencesSet('networkTimeout', g_networkTimeout);
-    Navigator.pop(context!);
+    // Navigator.pop(context!);
     return Future.value(false);
   }
 }

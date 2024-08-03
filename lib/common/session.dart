@@ -1,6 +1,6 @@
 // 檢查是否存有使用者登入狀態
-import 'package:pill_city/data/global.dart';
-import 'package:pill_city/common/preferences.dart';
+import 'package:pillcity/data/global.dart';
+import 'package:pillcity/common/preferences.dart';
 
 class Session {
   // 登入令牌 access_token

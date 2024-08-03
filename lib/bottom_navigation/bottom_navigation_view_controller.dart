@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/bottom_navigation/bottom_navigation_widget.dart';
+import 'package:pillcity/bottom_navigation/bottom_navigation_widget.dart';
 
 class BottomNavigationViewController extends StatelessWidget {
-  const BottomNavigationViewController({Key? key}) : super(key: key);
+  const BottomNavigationViewController({super.key});
   static const String _title = '';
 
   @override

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class LoginDataRequest {
   String url = '/api/signIn';
 

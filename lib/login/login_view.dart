@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/common/i18n_function/i18n_function.dart';
-import 'package:pill_city/common/i18n_function/i18n_switch.dart';
-import 'package:pill_city/data/global.dart';
-import 'package:pill_city/login/login_data_request.dart';
-import 'package:pill_city/login/login_view_controller.dart';
-import 'package:pill_city/login/login_function.dart';
+import 'package:pillcity/common/i18n_function/i18n_function.dart';
+import 'package:pillcity/common/i18n_function/i18n_switch.dart';
+import 'package:pillcity/data/global.dart';
+import 'package:pillcity/login/login_data_request.dart';
+import 'package:pillcity/login/login_view_controller.dart';
+import 'package:pillcity/login/login_function.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 class LoginView extends State<LoginViewController>
@@ -65,9 +65,9 @@ class LoginView extends State<LoginViewController>
         children: <Widget>[
           Stack(
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Image(
                     image: AssetImage('images/pill.png'),
                     width: 200,
@@ -171,7 +171,7 @@ class LoginView extends State<LoginViewController>
                           children: [
                             ElevatedButton(
                               onPressed: btnLogin,
-                              child: Text(' ' + tr('login.signin') + ' '),
+                              child: Text(' ${tr('login.signin')} '),
                             ),
                           ],
                         ),

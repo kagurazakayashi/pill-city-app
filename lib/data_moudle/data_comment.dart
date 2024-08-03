@@ -1,15 +1,15 @@
-import 'package:pill_city/data_moudle/data_author.dart';
+import 'package:pillcity/data_moudle/data_author.dart';
 
 class Comment {
   late List<Comment> comments = <Comment>[]; // 子評論
   late String id; // "8a7e7fad-b818-4f47-a4bd-f755a93722dc"
-  late int created_at_seconds;
+  late int createdAtSeconds;
   late DataAuthor author;
   late String content;
   late bool deleted;
-  late List media_urls;
+  late List mediaURLs;
 
-  Comment(Map<String,dynamic> data) {
+  Comment(Map<String, dynamic> data) {
     if (data.containsKey('comments')) {
       for (var e in (data['comments'] as List)) {
         Comment comment = Comment(e);
@@ -17,10 +17,10 @@ class Comment {
       }
     }
     id = data['id'];
-    created_at_seconds = data['created_at_seconds'];
+    createdAtSeconds = data['created_at_seconds'];
     author = DataAuthor(data['author']);
     content = data['content'];
     deleted = data['deleted'];
-    media_urls = data['media_urls'];
+    mediaURLs = data['media_urls'];
   }
 }

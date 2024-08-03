@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:pill_city/common/network/network_error.dart';
+import 'package:pillcity/common/network/network_error.dart';
 
 abstract class NetworkDelegate {
   bool networkOnRequest(

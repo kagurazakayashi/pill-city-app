@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pill_city/data_moudle/data_post.dart';
-import 'package:pill_city/common/network/network_enum_status.dart';
-import 'package:pill_city/home/timeline_one/timeline_block/home_block_view_controller.dart';
-import 'package:pill_city/home/timeline_function.dart';
+import 'package:pillcity/data_moudle/data_post.dart';
+import 'package:pillcity/common/network/network_enum_status.dart';
+import 'package:pillcity/home/timeline_one/timeline_block/home_block_view_controller.dart';
+import 'package:pillcity/home/timeline_function.dart';
 
 abstract class HomeListViewFunctionDelegate {
   changeProgressVisible(bool isVisible);
